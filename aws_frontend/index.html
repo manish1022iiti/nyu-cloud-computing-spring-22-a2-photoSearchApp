@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<!--        <link rel="stylesheet" href="index.css">-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/axios/dist/axios.standalone.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/components/hmac.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js"></script>
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.879.0.min.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/url-template/url-template.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/utils.js"></script>
+        <script type="text/javascript" src="apiGateway-js-sdk/apigClient.js"></script>
+        <script src="apiGateway-js-sdk/index.js"></script>
+        <style>
+             /* Three image containers (use 25% for four, and 50% for two, etc) */
+            .column {
+              float: left;
+              width: 33.33%;
+              padding: 5px;
+            }
+
+            /* Clear floats after image containers */
+            .row::after {
+              content: "";
+              clear: both;
+              display: table;
+            }
+        </style>
+    </head>
+    <center>
+        <header style="font-size: 40px;">
+            Photo Search
+        </header>
+    </center>
+    <body style="color: white; background-color: black">
+
+        <div class="container-fluid">
+                <form action="", method="get", target="", id="search_photos">
+                    <input name="search_query" id = "search_query" type="text" placeholder="Enter query here"
+                    style="width: 405px;">
+                    <button type="button">
+                        <i class="large material-icons" id="mic_search" onclick="runSpeechRecognition()">mic</i>
+                    </button><span id="action"></span>
+                </form>
+                <div class="row">
+                    <button type="button" style="width:100px; height: 25px;" onclick="searchPhotos()">Search</button>
+                </div>
+        </div>
+
+<!--        <div class="row">-->
+            <div id="search_results">
+            </div>
+<!--        </div>-->
+
+        <div>
+            <div id="upload_message">
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="Upload_files">
+                <form>
+                    <input type="file" id="uploaded_file">
+                    <input type="text" id="custom_labels" placeholder="label your image" value="">
+                </form>
+                <br>
+                <button id="upload_files" onclick="uploadPhoto()">Upload</button>
+        </div>
+    </body>
+
+</html>
