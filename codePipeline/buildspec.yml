@@ -1,0 +1,15 @@
+version: 0.2
+2	phases:
+3	 install:
+4	  runtime-versions:
+5	   python: 3.7
+6	 build: 
+7	  commands:
+8	   - sam build
+9	   - export BUCKET=artifact-op-bucket1
+10	   - sam package --template-file template.yml --s3-bucket $BUCKET --output-template-file packaged-template.yml
+11	artifacts:
+12	 type: zip
+13	 files:
+14	  - template.yml
+15	  - packaged-template.yml
