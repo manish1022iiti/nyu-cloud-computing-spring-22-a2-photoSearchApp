@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+2	Transform: AWS::Serverless-2016-10-31
+3	Description: Python file including external library
+4	Resources:
+5	 LambdaFunction1:
+6	  Type: AWS::Serverless::Function
+7	  Properties:
+8	   Handler: lambda_function.lambda_handler
+9	   Runtime: python3.7
+10	   FunctionName: n-search-photos
+11	   CodeUri: ./search-photos #Directory the source file is
+12	   Policies:
+13	      # Give the Lambda service access to poll your DynamoDB Stream
+14	      - AmazonLexFullAccess
+15	 
+16	 LambdaFunction2:
+17	  Type: AWS::Serverless::Function
+18	  Properties:
+19	   Handler: lambda_function.lambda_handler
+20	   Runtime: python3.7
+21	   FunctionName: n-index-photos
+22	   CodeUri: ./index-photos #Directory the source file is
+23	   Policies:
+24	      # Give the Lambda service access to poll your DynamoDB Stream
+25	      - AmazonLexFullAccess
+26	   
