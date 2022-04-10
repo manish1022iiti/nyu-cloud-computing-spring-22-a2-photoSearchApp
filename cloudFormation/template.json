@@ -1,0 +1,73 @@
+{
+"AWSTemplateFormatVersion": "2010-09-09",
+"Transform": "AWS::Serverless-2016-10-31",
+"Description": "CloudFormation Demo",
+"Resources": {
+    "Random": {
+        "Type" : "AWS::S3::Bucket",
+        "Properties": {
+            "AccessControl": "PublicRead",
+            "BucketName": "assignment2-b1",
+            "WebsiteConfiguration": {
+                "IndexDocument": "index.html"
+                
+            }
+        }
+      },
+    "LF1": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "S3Bucket": "assignment2-b1",
+                    "S3Key": "search-photos.zip"
+                },
+                "FunctionName": "demo",
+                "Handler": "demo/search-photos.lambda_handler",
+                "Runtime": "python3.7",
+                "Description": "Lambda function 2 for CF Demo",
+                "MemorySize": 128,
+                "Timeout": 30,
+                "Role": "arn:aws:iam::992229545431:role/awslambda",
+                "Environment": {
+                    "Variables": {
+                        "REGION": "us-east-1"
+                    }
+                }
+            }
+        }
+  }, 
+  "LF2": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "S3Bucket": "assignment2-b2",
+                    "S3Key": "index-photos.zip"
+                },
+                "FunctionName": "demo",
+                "Handler": "demo/index-photos.lambda_handler",
+                "Runtime": "python3.7",
+                "Description": "Lambda function 2 for CF Demo",
+                "MemorySize": 128,
+                "Timeout": 30,
+                "Role": "arn:aws:iam::992229545431:role/awslambda",
+                "Environment": {
+                    "Variables": {
+                        "REGION": "us-east-1"
+                    }
+                }
+            }
+        
+  },
+
+"Outputs": {
+        "WebsiteURL": {
+            "Description": "URL for Website Hosted on S3",
+            "Value": {
+                "Fn::GetAtt": [
+                    "S3Bucket",
+                    "WebsiteURL"
+                ]
+            }
+        }
+   } 
+}
